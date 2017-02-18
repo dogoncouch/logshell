@@ -26,9 +26,18 @@
 # WARNING! Major issue with programs that use full screen output,
 # Log files can become corrupt and/or fill up quickly.
 
+# TO DO: Get warning message inside screen when screen option is used.
+
+usage() {
+    echo "Usage: $0 [-c <script|screen>] [-f <logfile>] [-s <shell>] [-h]" 1>&2;
+    echo "Note to self: update usage"
+}
+
 # Basic config in case no file is present:
-# Command to use - current options are "script -f" and "screen -l"
+# Command to use - current options are "script -f" and "screen -L"
 COMMAND="script -f"
+# Shell to use:
+LSHELL=$SHELL
 # Log file
 LOGPATH=~/log/lsh
 LOGFILE=bash-log.$(date -u +%Y%m%d-%H%M%S)-UTC.${USER}@${HOSTNAME:-$(hostname)}.$$.${RANDOM}.log
@@ -42,7 +51,39 @@ if [ -r ~/logshell.conf ]; then
     . ~/logshell.conf
 fi
 
-#Print a warning:
+# Options: -c command, -f logfile, -s shell, -h
+while getopts ":c:f:s:h:" o; do
+    case "${o}" in
+        c)
+            if [ $OPTARG = "script" ]; then
+                COMMAND="script -f"
+            fi
+            if [ $OPTARG = "screen" ]; then
+                COMMAND="screen -L"
+            fi
+            # The old way:
+            # COMMAND=${OPTARG}
+            ;;
+        f)
+            LOGPATH=''
+            LOGFILE=${OPTARG}
+            ;;
+        s)
+            LSHELL=${OPTARG}
+            ;;
+        h)
+            usage
+            exit 0
+            ;;
+        *)
+            usage
+            exit 1
+            ;;
+    esac
+done
+shift $((OPTIND-1))
+
+# Print a warning:
 echo
 echo ======== WARNING! ========
 echo
@@ -52,17 +93,18 @@ echo
 echo ==========================
 echo
 
-#Make sure log file can be written:
+# Make sure log file can be written:
 if [ ! -w $LOGPATH ]; then
     echo Trying to create path for log file.
     mkdir -p $LOGPATH
 fi
 
-#Execute the command:
-$COMMAND $LOGPATH/$LOGFILE
+# Execute the command:
+shell=$LSHELL $COMMAND $LOGPATH/$LOGFILE
 
 #Print the size of the closed log file after the shell exits:
 echo
 echo Size of log file:
 du -sh $LOGPATH/$LOGFILE
 echo
+
