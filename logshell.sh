@@ -27,10 +27,19 @@
 # WARNING! Major issue with programs that use full screen output,
 # Log files can become corrupt and/or fill up quickly.
 
-# TO DO: Get warning message inside screen when screen option is used.
+# TO DO:
+# Get warning message inside screen when screen option is used.
+# Add log path argument.
 
 usage() {
     echo "Usage: $0 [-c <script|screen>] [-f <logfile>] [-s <shell>] [-h]" 1>&2;
+    echo
+    echo "Optional arguments:"
+    echo "  -h                          Print this help message"
+    echo "  -c [script|screen]          Command to use (script or screen)"
+    echo "  -f <logfile>                Output file (try default)"
+    # echo "  -p <logpath>                Path for output file (default ~/log/logshell)"
+    echo "  -s <shell>                  Shell to use"
     echo "Note to self: update usage"
 }
 
@@ -40,7 +49,7 @@ COMMAND="script -f"
 # Shell to use:
 LSHELL=$SHELL
 # Log file
-LOGPATH=~/log/lsh
+LOGPATH=~/log/logshell
 LOGFILE=bash-log.$(date -u +%Y%m%d-%H%M%S)-UTC.${USER}@${HOSTNAME:-$(hostname)}.$$.${RANDOM}.log
 
 # Read global config file:
