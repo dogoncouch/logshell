@@ -22,7 +22,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-# logshell - Starts a shell with logging.
+# logshell v0.1 - Starts a shell with logging.
+
 # WARNING! Major issue with programs that use full screen output,
 # Log files can become corrupt and/or fill up quickly.
 
