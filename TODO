@@ -1,5 +1,7 @@
 To Do:
 
 * Fix full-screen program issue
-* Add support for command line arguements
-* Add support for alternate shells
+* Update usage with explanations for arguments
+* Create install script
+* Get warning inside screen when '-c screen' option is used
+
