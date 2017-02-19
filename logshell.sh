@@ -29,7 +29,6 @@
 
 # TO DO:
 # Get warning message inside screen when screen option is used.
-# Add log path argument.
 
 usage() {
     echo "Usage: $0 [-c <script|screen>] [-f <logfile>] [-s <shell>] [-h]" 1>&2;
@@ -38,7 +37,6 @@ usage() {
     echo "  -h                          Print this help message"
     echo "  -c [script|screen]          Command to use (script or screen)"
     echo "  -f <logfile>                Output file (try default)"
-    # echo "  -p <logpath>                Path for output file (default ~/log/logshell)"
     echo "  -s <shell>                  Shell to use"
     echo "Note to self: update usage"
 }
@@ -57,8 +55,8 @@ if [ -r /etc/logshell.conf ]; then
     . /etc/logshell.conf
 fi
 # Read local user config file:
-if [ -r ~/logshell.conf ]; then
-    . ~/logshell.conf
+if [ -r ~/.config/logshell/logshell.conf ]; then
+    . ~/.config/logshell/logshell.conf
 fi
 
 # Options: -c command, -f logfile, -s shell, -h
@@ -71,8 +69,6 @@ while getopts ":c:f:s:h:" o; do
             if [ $OPTARG = "screen" ]; then
                 COMMAND="screen -L"
             fi
-            # The old way:
-            # COMMAND=${OPTARG}
             ;;
         f)
             LOGPATH=''
@@ -104,17 +100,24 @@ echo ==========================
 echo
 
 # Make sure log file can be written:
-if [ ! -w $LOGPATH ]; then
-    echo Trying to create path for log file.
-    mkdir -p $LOGPATH
+if [ $LOGPATH ]; then
+    if [ ! -w $LOGPATH ]; then
+        echo Trying to create path for log file.
+        mkdir -p $LOGPATH
+    fi
 fi
 
 # Execute the command:
-shell=$LSHELL $COMMAND $LOGPATH/$LOGFILE
+if [ $LOGPATH ]; then
+    SHELL=$LSHELL $COMMAND $LOGPATH/$LOGFILE
+else
+    SHELL=$LSHELL $COMMAND $LOGFILE
+fi
 
 #Print the size of the closed log file after the shell exits:
 echo
 echo Size of log file:
+
 du -sh $LOGPATH/$LOGFILE
 echo
 
