@@ -31,13 +31,13 @@
 # Get warning message inside screen when screen option is used.
 
 usage() {
-    echo "Usage: $0 [-c <script|screen>] [-f <logfile>] [-s <shell>] [-h]"
+    echo "Usage: $0 [-c {script|screen}] [-f <logfile>] [-s <shell>] [-h]"
     echo
     echo "Optional arguments:"
     echo "  -h                          Print this help message"
     echo "  -c [script|screen]          Command to use (script or screen)"
     echo "  -f <logfile>                Output file (try default)"
-    echo "  -p <logpath>                Output path (use standard filename)"
+    echo "  -p <logpath>                Output path (do not use with -f)"
     echo "  -s <shell>                  Shell to use"
 }
 
@@ -90,19 +90,18 @@ while getopts ":c:f:p:s:h:" o; do
             ;;
     esac
 done
-shift $((OPTIND-1))
 
 # Print a warning:
 echo
 echo ======== WARNING! ========
 echo
 echo Don\'t use vim, clear, less, or anything that manages the whole screen!
-echo Files can get corrupted and/or fill up quickly.
+echo Output file can get corrupted and/or fill up quickly.
 echo
 echo ==========================
 echo
 
-# Make sure log file can be written:
+# Make sure log path can be written:
 if [ $LOGPATH ]; then
     if [ ! -w $LOGPATH ]; then
         echo Trying to create path for log file.
@@ -110,7 +109,7 @@ if [ $LOGPATH ]; then
     fi
 fi
 
-# Prepare the output path:
+# Prepare the full output path:
 if [ $LOGPATH ]; then
     FULLPATH=$LOGPATH/$LOGFILE
 else
@@ -123,7 +122,6 @@ SHELL=$LSHELL $COMMAND $FULLPATH
 #Print the size of the closed log file after the shell exits:
 echo
 echo Size of log file:
-
 du -sh $FULLPATH
 echo
 

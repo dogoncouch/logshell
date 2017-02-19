@@ -1,4 +1,4 @@
 # logshell
 Starts a shell and logs it to a file.
 
-WARNING! Major issue with programs that use full screen output. Log files can become corrupt and/or fill up quickly.
+WARNING! Do not use programs that manage the full screen! Output file can become corrupt and/or fill up quickly.
