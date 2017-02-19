@@ -31,14 +31,14 @@
 # Get warning message inside screen when screen option is used.
 
 usage() {
-    echo "Usage: $0 [-c <script|screen>] [-f <logfile>] [-s <shell>] [-h]" 1>&2;
+    echo "Usage: $0 [-c <script|screen>] [-f <logfile>] [-s <shell>] [-h]"
     echo
     echo "Optional arguments:"
     echo "  -h                          Print this help message"
     echo "  -c [script|screen]          Command to use (script or screen)"
     echo "  -f <logfile>                Output file (try default)"
+    echo "  -p <logpath>                Output path (use standard filename)"
     echo "  -s <shell>                  Shell to use"
-    echo "Note to self: update usage"
 }
 
 # Basic config in case no file is present:
@@ -59,8 +59,8 @@ if [ -r ~/.config/logshell/logshell.conf ]; then
     . ~/.config/logshell/logshell.conf
 fi
 
-# Options: -c command, -f logfile, -s shell, -h
-while getopts ":c:f:s:h:" o; do
+# Options: -c command, -f logfile, -p path, -s shell, -h
+while getopts ":c:f:p:s:h:" o; do
     case "${o}" in
         c)
             if [ $OPTARG = "script" ]; then
@@ -73,6 +73,9 @@ while getopts ":c:f:s:h:" o; do
         f)
             LOGPATH=''
             LOGFILE=${OPTARG}
+            ;;
+        p)
+            LOGPATH=${OPTARG}
             ;;
         s)
             LSHELL=${OPTARG}
@@ -107,17 +110,20 @@ if [ $LOGPATH ]; then
     fi
 fi
 
-# Execute the command:
+# Prepare the output path:
 if [ $LOGPATH ]; then
-    SHELL=$LSHELL $COMMAND $LOGPATH/$LOGFILE
+    FULLPATH=$LOGPATH/$LOGFILE
 else
-    SHELL=$LSHELL $COMMAND $LOGFILE
+    FULLPATH=$LOGFILE
 fi
+
+# Execute the command:
+SHELL=$LSHELL $COMMAND $FULLPATH
 
 #Print the size of the closed log file after the shell exits:
 echo
 echo Size of log file:
 
-du -sh $LOGPATH/$LOGFILE
+du -sh $FULLPATH
 echo
 
