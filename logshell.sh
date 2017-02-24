@@ -25,7 +25,7 @@
 # logshell v0.1 - Starts a shell with logging.
 
 # WARNING! Major issue with programs that use full screen output,
-# Log files can become corrupt and/or fill up quickly.
+# Log files can become corrupt.
 
 # TO DO:
 # Get warning message inside screen when screen option is used.
@@ -96,7 +96,7 @@ echo
 echo ======== WARNING! ========
 echo
 echo Don\'t use vim, clear, less, or anything that manages the whole screen!
-echo Output file can get corrupted and/or fill up quickly.
+echo Output file can get corrupted.
 echo
 echo ==========================
 echo
