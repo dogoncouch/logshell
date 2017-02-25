@@ -1,8 +1,8 @@
 # logshell
-Starts a shell and logs it to a file.
+Starts a shell and logs it to a file. Requires bash, and either script or screen.
 
 # To install:
-<pre>git clone https://github.com/dogoncouch/logshell
+<pre>git clone https://github.com/dogoncouch/logshell.git
 cd logshell
 ./setup.sh</pre>
 
