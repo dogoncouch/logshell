@@ -51,5 +51,6 @@ else
         cp -n logshell.conf ~/.config/logshell.conf
     fi
     echo Note: Add ~/bin to PATH variable
+    echo "(echo PATH=\$PATH:~/bin >> ~/.profile)"
     echo in ~/.profile.
 fi
