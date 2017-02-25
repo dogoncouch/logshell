@@ -1,14 +1,10 @@
 # logshell
 Starts a shell and logs it to a file.
 
-WARNING! Still unstable.
-
-Do not use programs that manage the full screen! Output file can get corrupted.
-
-To install:
+# To install:
 ./setup.sh
 
 Setup will install in /usr/bin if it has privileges there, ~/bin otherwise. You may need to add ~/bin to your path in ~/.profile.
 
-Usage information:
+# Usage information:
 logshell -h
