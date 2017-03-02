@@ -119,9 +119,13 @@ fi
 # Execute the command:
 SHELL=$LSHELL $COMMAND $FULLPATH
 
-#Print the size of the closed log file after the shell exits:
+# To Do: get this working:
+# Strip non-ascii characters out of the file:
+# echo Stripping non-ascii characters from log file
+# sed -i 's/[\d128-\d255]//g' $FULLPATH
+# echo Done
+
+# Print the size of the closed log file after the shell exits:
 echo
 echo Size of log file:
 du -sh $FULLPATH
-echo
-

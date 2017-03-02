@@ -14,7 +14,7 @@ Setup will install in /usr/bin if it has privileges there, ~/bin otherwise. You 
 
 Optional arguments:
   -h                          Print this help message
-  -c [script|screen]          Command to use (script or screen)
+  -c &lt;script|screen&gt;          Command to use (script or screen)
   -f &lt;logfile&gt;                Output file (try default)
   -p &lt;logpath&gt;                Output path (do not use with -f)
   -s &lt;shell&gt;                  Shell to use</pre>
