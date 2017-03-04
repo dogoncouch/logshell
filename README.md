@@ -6,7 +6,7 @@ Starts a shell and logs it to a file. Requires bash, and either script or screen
 cd logshell
 ./setup.sh</pre>
 
-Setup will install in /usr/bin if it has privileges there, ~/bin otherwise. You may need to add ~/bin to your path in ~/.profile:
+Setup will install in /usr/local/bin if it has privileges there, ~/bin otherwise. You may need to add ~/bin to your path in ~/.profile:
 <pre>echo PATH=$PATH:~/bin >> ~/.profile</pre>
 
 # Usage information:

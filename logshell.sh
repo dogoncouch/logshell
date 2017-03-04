@@ -50,13 +50,9 @@ LSHELL=$SHELL
 LOGPATH=~/log/logshell
 LOGFILE=bash-log.$(date -u +%Y%m%d-%H%M%S)-UTC.${USER}@${HOSTNAME:-$(hostname)}.$$.${RANDOM}.log
 
-# Read global config file:
-if [ -r /etc/logshell.conf ]; then
-    . /etc/logshell.conf
-fi
 # Read local user config file:
-if [ -r ~/.config/logshell/logshell.conf ]; then
-    . ~/.config/logshell/logshell.conf
+if [ -r ~/.config/logshell.conf ]; then
+    . ~/.config/logshell.conf
 fi
 
 # Options: -c command, -f logfile, -p path, -s shell, -h
