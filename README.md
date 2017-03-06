@@ -1,5 +1,5 @@
 # logshell
-Starts a shell and logs it to a file. Requires bash, and either script or screen.
+Starts a shell and logs it to a file. Requires bash, and either script or screen. Note: cat the log file back for full color.
 
 # To install:
 <pre>git clone https://github.com/dogoncouch/logshell.git
