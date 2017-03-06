@@ -10,7 +10,7 @@ Setup will install in /usr/local/bin if it has privileges there, ~/bin otherwise
 <pre>echo PATH=$PATH:~/bin >> ~/.profile</pre>
 
 # Usage information:
-<pre>Usage: logshell [-c {script|screen}] [-f &lt;logfile&gt;] [-s &lt;shell&gt;] [-h]
+<pre>Usage: logshell [-h] [-c {script|screen}] [-f &lt;logfile&gt;] [-s &lt;shell&gt;]
 
 Optional arguments:
   -h                          Print this help message

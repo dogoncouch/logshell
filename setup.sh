@@ -26,6 +26,10 @@ echo Installing logshell
 if [ -w /usr/local/bin ]; then
     echo Write privileges in /usr/local/bin, installing there.
     cp logshell.sh /usr/local/bin/logshell
+    if [ -w /usr/share/man ]; then
+        echo Installing documentation
+        cp doc/logshell.1 /usr/share/man/man1
+    fi
     if [ -w /etc ]; then
         if [ -r /usr/local/share/logshell/logshell.conf ]; then
             echo Existing config template found at:
@@ -42,6 +46,10 @@ else
     echo installing in ~/bin.
     mkdir -p ~/bin
     cp logshell.sh ~/bin/logshell
+    if [ -w /usr/share/man ];then
+        echo Installing documentation
+        cp docs/logshell.1 /usr/share/man/man1
+    fi
     if [ -r ~/.config/logshell.conf ]; then
         echo Existing config file found at:
         echo ~/.config/logshell.conf

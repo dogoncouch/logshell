@@ -31,7 +31,7 @@
 # Get warning message inside screen when screen option is used.
 
 usage() {
-    echo "Usage: ${0##*/} [-c {script|screen}] [-f <logfile>] [-s <shell>] [-h]"
+    echo "Usage: ${0##*/} [-h] [-c {script|screen}] [-f <logfile>] [-s <shell>]"
     echo
     echo "Optional arguments:"
     echo "  -h                          Print this help message"
