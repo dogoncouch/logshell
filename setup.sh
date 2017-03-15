@@ -29,6 +29,8 @@ if [ -w /usr/local/bin ]; then
     if [ -w /usr/share/man ]; then
         echo Installing documentation
         cp doc/logshell.1 /usr/share/man/man1
+    else
+        echo Documentation not installed - no permissions in /usr/share/man
     fi
     if [ -w /etc ]; then
         if [ -r /usr/local/share/logshell/logshell.conf ]; then
@@ -49,6 +51,8 @@ else
     if [ -w /usr/share/man ];then
         echo Installing documentation
         cp docs/logshell.1 /usr/share/man/man1
+    else
+        echo Documentation not installed - no permissions in /usr/share/man
     fi
     if [ -r ~/.config/logshell.conf ]; then
         echo Existing config file found at:
