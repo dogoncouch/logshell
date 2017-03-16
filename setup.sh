@@ -29,6 +29,9 @@ if [ -w /usr/local/bin ]; then
     if [ -w /usr/share/man ]; then
         echo Installing documentation
         cp doc/logshell.1 /usr/share/man/man1
+        mkdir -p /usr/share/doc/logshell
+        cp README.md /usr/share/doc/logshell
+        cp LICENSE /usr/share/doc/logshell
     else
         echo Documentation not installed - no permissions in /usr/share/man
     fi
@@ -51,6 +54,9 @@ else
     if [ -w /usr/share/man ];then
         echo Installing documentation
         cp docs/logshell.1 /usr/share/man/man1
+        mkdir -p /usr/share/doc/logshell
+        cp README.md /usr/share/doc/logshell
+        cp LICENSE /usr/share/doc/logshell
     else
         echo Documentation not installed - no permissions in /usr/share/man
     fi
