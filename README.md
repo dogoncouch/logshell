@@ -18,3 +18,10 @@ Optional arguments:
   -f &lt;logfile&gt;                Output file (try default)
   -p &lt;logpath&gt;                Output path (do not use with -f)
   -s &lt;shell&gt;                  Shell to use</pre>
+
+# Tips
+If you set a command as your shell, logshell will execute it, log the output, and then exit. The following will start the quizlight program, log its output, and then log out of the system entirely so the test-taker can't do any tampering:
+
+    logshell -s quizlight ; exit
+
+Note: this only works with commands that output to standard output.
