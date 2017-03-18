@@ -48,7 +48,7 @@ COMMAND="script -f"
 LSHELL=$SHELL
 # Log file
 LOGPATH=~/log/logshell
-LOGFILE=shell-log.$(date -u +%Y%m%d-%H%M%S)-UTC.${USER}@${HOSTNAME:-$(hostname)}.$$.${RANDOM}.log
+LOGFILE=shell.$(date -u +%Y%m%d-%H%M%S)-UTC.${USER}@${HOSTNAME:-$(hostname)}.$$.${RANDOM}.log
 
 # Read local user config file:
 if [ -r ~/.config/logshell.conf ]; then

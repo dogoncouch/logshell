@@ -2,12 +2,12 @@
 Starts a shell and logs it to a file. Requires bash, and either script or screen. Note: cat the log file back for full color.
 
 # To install:
-<pre>git clone https://github.com/dogoncouch/logshell.git
-cd logshell
-./setup.sh</pre>
+    git clone https://github.com/dogoncouch/logshell.git
+    cd logshell
+    ./setup.sh
 
 Setup will install in /usr/local/bin if it has privileges there, ~/bin otherwise. You may need to add ~/bin to your path in ~/.profile:
-<pre>echo PATH=$PATH:~/bin >> ~/.profile</pre>
+    echo PATH=$PATH:~/bin >> ~/.profile
 
 # Usage information:
 <pre>Usage: logshell [-h] [-c {script|screen}] [-f &lt;logfile&gt;] [-s &lt;shell&gt;]
