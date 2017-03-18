@@ -53,6 +53,9 @@ LOGFILE=shell.$(date -u +%Y%m%d-%H%M%S)-UTC.${USER}@${HOSTNAME:-$(hostname)}.$$.
 # Read local user config file:
 if [ -r ~/.config/logshell.conf ]; then
     . ~/.config/logshell.conf
+else
+    mkdir -p ~/.config
+    cp -n /usr/local/share/logshell/logshell.conf ~/.config
 fi
 
 # Options: -c command, -f logfile, -p path, -s shell, -h
