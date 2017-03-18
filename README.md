@@ -7,6 +7,7 @@ Starts a shell and logs it to a file. Requires bash, and either script or screen
     ./setup.sh
 
 Setup will install in `` /usr/local/bin `` if it has privileges there, `` ~/bin `` otherwise. In the latter case, you may need to update your PATH variable:
+    
     echo PATH=$PATH:~/bin >> ~/.profile
 
 # Usage information:
