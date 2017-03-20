@@ -4,9 +4,9 @@ Starts a shell and logs it to a file. Requires bash, and either script or screen
 # To install:
     git clone https://github.com/dogoncouch/logshell.git
     cd logshell
-    ./setup.sh
+    sudo ./setup.sh
 
-Setup will install in `` /usr/local/bin `` if it has privileges there, `` ~/bin `` otherwise. In the latter case, you may need to update your PATH variable:
+Using sudo is optional; setup will install in `` /usr/local/bin `` if it has privileges there, `` ~/bin `` otherwise. In the latter case, you may need to update your PATH variable:
     
     echo PATH=$PATH:~/bin >> ~/.profile
 
