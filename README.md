@@ -15,8 +15,8 @@ See the latest instructions on the [releases page](https://github.com/dogoncouch
       -s <shell>                  Shell to use
 
 # Tips
-If you set a command as your shell, logshell will execute it, log the output, and then exit. The following will start the quizlight program, log its output, and then log out of the system entirely so the test-taker can't do any tampering:
+If you set a command as your shell (with the -s option), logshell will execute it, log the output, and then exit. The following will start the quizlight program, log its output, and then log out of the system entirely so the test-taker can't do any tampering:
 
     logshell -s quizlight ; exit
 
-Note: this only works with commands that output to standard output.
+Note: This only works with commands that output to standard output.
