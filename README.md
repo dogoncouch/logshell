@@ -2,13 +2,7 @@
 Starts a shell and logs it to a file. Requires bash, and either script or screen. Note: cat the log file back for full color.
 
 # To install:
-    git clone https://github.com/dogoncouch/logshell.git
-    cd logshell
-    sudo ./setup.sh
-
-Using sudo is optional; setup will install in `` /usr/local/bin `` if it has privileges there, `` ~/bin `` otherwise. In the latter case, you may need to update your PATH variable:
-    
-    echo PATH=$PATH:~/bin >> ~/.profile
+See the latest instructions on the [releases page](https://github.com/dogoncouch/logshell/releases)
 
 # Usage information:
     Usage: logshell [-h] [-c {script|screen}] [-f <logfile>] [-s <shell>]
