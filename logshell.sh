@@ -94,8 +94,8 @@ done
 echo
 echo ======== WARNING! ========
 echo
-echo Don\'t use vim, clear, less, or anything that manages the whole screen!
-echo Output file can get corrupted.
+echo Don\'t use vim, clear, less, or anything that manages the whole screen.
+echo Output file can be difficult to read.
 echo
 echo ==========================
 echo
