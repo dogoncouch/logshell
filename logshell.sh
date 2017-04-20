@@ -58,7 +58,7 @@ else
 fi
 
 # Options: -c command, -f logfile, -p path, -s shell, -h
-while getopts ":c:f:p:s:h:" o; do
+while getopts ":c:f:p:s:oh:" o; do
     case "${o}" in
         c)
             if [ $OPTARG = "script" ]; then
@@ -78,12 +78,12 @@ while getopts ":c:f:p:s:h:" o; do
         s)
             LSHELL=${OPTARG}
             ;;
+        o)
+            FORMATTING=1
+            ;;
         h)
             usage
             exit 0
-            ;;
-        o)
-            FORMATTING=1
             ;;
         *)
             usage
@@ -128,7 +128,7 @@ SHELL=$LSHELL $COMMAND $FULLPATH
 
 # Strip special characters from output:
 if [ $FORMATTING ]; then
-    cat "${FULLPATH}" | perl -pe 's/\e([^\[\]]|\[.*?[a-zA-Z]|\].*?\a)//g' > "${FULLPATH}"
+    perl -pi.bak -e 's/\e([^\[\]]|\[.*?[a-zA-Z]|\].*?\a)//g' $FULLPATH
 fi
 
 # Print the size of the closed log file after the shell exits:
