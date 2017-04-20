@@ -15,9 +15,11 @@ See the latest instructions on the [releases page](https://github.com/dogoncouch
       -p <logpath>                Output path (do not use with -f)
       -s <shell>                  Shell to use
 
-# Tips
-If you set a command as your shell (with the -s option), logshell will execute it, log the output, and then exit. The following will start the quizlight program, log its output, and then log out of the system entirely so the test-taker can't do any tampering:
+# Notes
+1. If you set a command as your shell (with the -s option), logshell will execute it, log the output, and then exit. The following will start the quizlight program, log its output, and then log out of the system entirely so the test-taker can't do any tampering:
 
     logshell -s quizlight ; exit
 
 Note: This only works with commands that output to standard output.
+
+2. Using logshell to capture trace output is a good development tool. Full output is captured, and can be compared to trace output from known working versions for debugging.
