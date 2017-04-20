@@ -22,11 +22,12 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-# logshell v0.2-alpha - Starts a shell with logging.
+# logshell v0.3-beta - Starts a shell with logging.
 
-# WARNING: Issue with programs that use full screen output,
+# WARNING: Issue with programs that use full screen output;
 # Log files can become difficult to read.
 
+VERSION="0.3-beta"
 
 usage() {
     echo "Usage: ${0##*/} [-h] [-c {script|screen}] [-f <logfile>] [-s <shell>]"
@@ -58,7 +59,7 @@ else
 fi
 
 # Options: -c command, -f logfile, -p path, -s shell, -h
-while getopts ":c:f:p:s:oh:" o; do
+while getopts ":c:f:p:s:ovh:" o; do
     case "${o}" in
         c)
             if [ $OPTARG = "script" ]; then
@@ -80,6 +81,10 @@ while getopts ":c:f:p:s:oh:" o; do
             ;;
         o)
             FORMATTING=1
+            ;;
+        v)
+            echo logshell-$VERSION
+            exit 0
             ;;
         h)
             usage
