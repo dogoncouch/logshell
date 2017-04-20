@@ -133,10 +133,15 @@ SHELL=$LSHELL $COMMAND $FULLPATH
 
 # Strip special characters from output:
 if [ $FORMATTING ]; then
-    perl -pi.bak -e 's/\e([^\[\]]|\[.*?[a-zA-Z]|\].*?\a)//g' $FULLPATH
+    perl -pi.alt -e 's/\e([^\[\]]|\[.*?[a-zA-Z]|\].*?\a)//g' $FULLPATH
 fi
 
 # Print the size of the closed log file after the shell exits:
 echo
 echo Size of log file:
 du -sh $FULLPATH
+if [ $FORMATTING ]; then
+    echo
+    echo Size of unformatted log file:
+    du -sh $FULLPATH.alt
+fi
