@@ -24,17 +24,16 @@
 
 # logshell v0.2-alpha - Starts a shell with logging.
 
-# WARNING! Major issue with programs that use full screen output,
-# Log files can become corrupt.
+# WARNING: Issue with programs that use full screen output,
+# Log files can become difficult to read.
 
-# TO DO:
-# Get warning message inside screen when screen option is used.
 
 usage() {
     echo "Usage: ${0##*/} [-h] [-c {script|screen}] [-f <logfile>] [-s <shell>]"
     echo
     echo "Optional arguments:"
     echo "  -h                          Print this help message"
+    echo "  -o                          Strip special chars (and color) from output"
     echo "  -c [script|screen]          Command to use (script or screen)"
     echo "  -f <logfile>                Output file (try default)"
     echo "  -p <logpath>                Output path (do not use with -f)"
@@ -83,6 +82,9 @@ while getopts ":c:f:p:s:h:" o; do
             usage
             exit 0
             ;;
+        o)
+            FORMATTING=1
+            ;;
         *)
             usage
             exit 1
@@ -123,6 +125,11 @@ SHELL=$LSHELL $COMMAND $FULLPATH
 # echo Stripping non-ascii characters from log file
 # sed -i 's/[\d128-\d255]//g' $FULLPATH
 # echo Done
+
+# Strip special characters from output:
+if [ $FORMATTING ]; then
+    cat "${FULLPATH}" | perl -pe 's/\e([^\[\]]|\[.*?[a-zA-Z]|\].*?\a)//g' > "${FULLPATH}"
+fi
 
 # Print the size of the closed log file after the shell exits:
 echo

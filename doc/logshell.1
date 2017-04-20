@@ -3,7 +3,7 @@
 logshell - Log a shell session to a file.
 
 .SH SYNOPSIS
-\fBlogshell \fR[\fB-h\fR] [\fB-c \fI{script|screen}\fR] [\fB-f \fI<logfile>\fR] [\fB-s \fI<shell>\fR] 
+\fBlogshell \fR[\fB-h\fR] [\fB-o\fR] [\fB-c \fI{script|screen}\fR] [\fB-f \fI<logfile>\fR] [\fB-s \fI<shell>\fR] 
 
 .SH DESCRIPTION
 \fBlogshell\fP is a tool for logging shell sessions. It supports terminal colors, different shells, and a few different commands for logging. Cat the log files back later for full color.
@@ -14,6 +14,7 @@ Using programs that control the full screen (vim, less, etc) inside the logged s
 .SH OPTIONS
 
     \fB-h\fP                          Print this help message
+    \fB-o\fP                          Strip special chars (and color) from output
     \fB-c\fP \fI[script|screen]\fR          Command to use (script or screen)
     \fB-f\fP \fI<logfile>\fR                Output file (try default)
     \fB-p\fP \fI<logpath>\fR                Output path (do not use with -f)

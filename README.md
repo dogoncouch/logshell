@@ -5,10 +5,11 @@ Starts a shell and logs it to a file. Requires bash, and either script or screen
 See the latest instructions on the [releases page](https://github.com/dogoncouch/logshell/releases)
 
 # Usage information:
-    Usage: logshell [-h] [-c {script|screen}] [-f <logfile>] [-s <shell>]
+    Usage: logshell [-h] [-o] [-c {script|screen}] [-f <logfile>] [-s <shell>]
 
     Optional arguments:
       -h                          Print this help message
+      -o                          Strip special chars (and color) from output
       -c {script|screen}          Command to use (script or screen)
       -f <logfile>                Output file (try default)
       -p <logpath>                Output path (do not use with -f)
