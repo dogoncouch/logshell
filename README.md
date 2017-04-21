@@ -24,7 +24,7 @@ See the latest instructions on the [releases page](https://github.com/dogoncouch
 
     logshell -s quizlight ; exit
 
-Note: This only works with commands that output to standard output.
+    Note: This only works with commands that output to standard output.
 
 3. Using logshell to capture trace output is a good development tool. Full output is captured, and can be compared to trace output from known working versions for debugging.
 
