@@ -5,15 +5,17 @@ Starts a shell and logs it to a file. Requires bash, and either script or screen
 See the latest instructions on the [releases page](https://github.com/dogoncouch/logshell/releases)
 
 # Usage information:
-    Usage: logshell [-h] [-o] [-c {script|screen}] [-f <logfile>] [-s <shell>]
+    Usage: logshell.sh [-hvo] [-c {script|screen}] [-f <logfile>] [-s <shell>] [-e <file>]
 
     Optional arguments:
-      -h                          Print this help message
-      -o                          Strip special chars (and color) from output
-      -c {script|screen}          Command to use (script or screen)
-      -f <logfile>                Output file (try default)
-      -p <logpath>                Output path (do not use with -f)
-      -s <shell>                  Shell to use
+      -h                      Print this help message
+      -v                      Print the version number
+      -o                      Strip escape sequences (and color) from output
+      -e <file>               Strip escape sequences from an existing file
+      -c [script|screen]      Command to use (script or screen)
+      -f <logfile>            Output file (try default)
+      -p <logpath>            Output path (do not use with -f)
+      -s <shell>              Shell to use
 
 # Notes
 1. If you set a command as your shell (with the -s option), logshell will execute it, log the output, and then exit. The following will start the quizlight program, log its output, and then log out of the system entirely so the test-taker can't do any tampering:

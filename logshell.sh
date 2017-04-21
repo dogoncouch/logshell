@@ -30,15 +30,17 @@
 VERSION="0.3-beta"
 
 usage() {
-    echo "Usage: ${0##*/} [-h] [-c {script|screen}] [-f <logfile>] [-s <shell>]"
+    echo "Usage: ${0##*/} [-hvo] [-c {script|screen}] [-f <logfile>] [-s <shell>] [-e <file>]"
     echo
     echo "Optional arguments:"
-    echo "  -h                          Print this help message"
-    echo "  -o                          Strip special chars (and color) from output"
-    echo "  -c [script|screen]          Command to use (script or screen)"
-    echo "  -f <logfile>                Output file (try default)"
-    echo "  -p <logpath>                Output path (do not use with -f)"
-    echo "  -s <shell>                  Shell to use"
+    echo "  -h                      Print this help message"
+    echo "  -v                      Print the version number"
+    echo "  -o                      Strip escape sequences (and color) from output"
+    echo "  -e <file>               Strip escape sequences from an existing file"
+    echo "  -c [script|screen]      Command to use (script or screen)"
+    echo "  -f <logfile>            Output file (try default)"
+    echo "  -p <logpath>            Output path (do not use with -f)"
+    echo "  -s <shell>              Shell to use"
 }
 
 # Basic config in case no file is present:
@@ -59,7 +61,7 @@ else
 fi
 
 # Options: -c command, -f logfile, -p path, -s shell, -h
-while getopts ":c:f:p:s:ovh:" o; do
+while getopts ":c:f:p:s:e:ovh:" o; do
     case "${o}" in
         c)
             if [ $OPTARG = "script" ]; then
@@ -81,6 +83,10 @@ while getopts ":c:f:p:s:ovh:" o; do
             ;;
         o)
             FORMATTING=1
+            ;;
+        e)
+            perl -pi.alt -e 's/\e([^\[\]]|\[.*?[a-zA-Z]|\].*?\a)//g' "${OPTARG}"
+            exit 0
             ;;
         v)
             echo logshell-$VERSION
@@ -124,12 +130,6 @@ fi
 
 # Execute the command:
 SHELL=$LSHELL $COMMAND $FULLPATH
-
-# To Do: get this working:
-# Strip non-ascii characters out of the file:
-# echo Stripping non-ascii characters from log file
-# sed -i 's/[\d128-\d255]//g' $FULLPATH
-# echo Done
 
 # Strip special characters from output:
 if [ $FORMATTING ]; then
