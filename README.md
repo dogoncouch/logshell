@@ -23,3 +23,5 @@ See the latest instructions on the [releases page](https://github.com/dogoncouch
 Note: This only works with commands that output to standard output.
 
 2. Using logshell to capture trace output is a good development tool. Full output is captured, and can be compared to trace output from known working versions for debugging.
+
+3. logshell can also be used to watch live tcpdump output and log it at the same time.
