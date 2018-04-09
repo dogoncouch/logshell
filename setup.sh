@@ -22,51 +22,23 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-echo Installing logshell
-if [ -w /usr/local/bin ]; then
-    echo Write privileges in /usr/local/bin, installing there.
-    cp logshell.sh /usr/local/bin/logshell
-    if [ -w /usr/share/man ]; then
-        echo Installing documentation
-        cp doc/logshell.1 /usr/share/man/man1
-        mkdir -p /usr/share/doc/logshell
-        cp README.md /usr/share/doc/logshell
-        cp LICENSE /usr/share/doc/logshell
-    else
-        echo Documentation not installed - no permissions in /usr/share/man
-    fi
-    if [ -w /usr/local ]; then
-        echo Installing config template at:
-        echo /usr/local/share/logshell/logshell.conf
-        mkdir -p /usr/local/share/logshell
-        cp logshell.conf /usr/local/share/logshell/logshell.conf
-    else
-        echo Config template not installed - no permissions in /usr/local/
-    fi
+if [ ${UID} = 0 ];then
+    USRBASE=/usr/local
+    echo Installing logshell globally
+    echo Base dir: /usr/local
 else
-    echo No write privileges in /usr/bin:
-    echo installing in ~/bin.
-    mkdir -p ~/bin
-    cp logshell.sh ~/bin/logshell
-    if [ -w /usr/share/man ];then
-        echo Installing documentation
-        cp docs/logshell.1 /usr/share/man/man1
-        mkdir -p /usr/share/doc/logshell
-        cp README.md /usr/share/doc/logshell
-        cp LICENSE /usr/share/doc/logshell
-    else
-        echo Documentation not installed - no permissions in /usr/share/man
-    fi
-    if [ -r ~/.config/logshell.conf ]; then
-        echo Existing config file found at:
-        echo ~/.config/logshell.conf
-    else
-        echo Installing config template at:
-        echo ~/.config/logshell.conf
-        mkdir -p ~/.config
-        cp -n logshell.conf ~/.config/logshell.conf
-    fi
-    echo Note: Add ~/bin to PATH variable
-    echo "(echo PATH=\$PATH:~/bin >> ~/.profile)"
-    echo in ~/.profile.
+    USRBASE=~/.local/
+    echo Installing logshell locally
+    echo Base dir: ~/.local
 fi
+
+mkdir -p "${USRBASE}/bin"
+cp logshell.sh "${USRBASE}/bin/logshell"
+
+echo Installing documentation
+mkdir -p "${USRBASE}/share/man/man1"
+cp doc/logshell.1 "${USRBASE}/share/man/man1"
+mkdir -p "${USRBASE}/share/doc/logshell"
+cp README.md LICENSE "${USRBASE}/share/doc/logshell"
+mkdir -p "${USRBASE}/share/logshell"
+cp logshell.conf "${USRBASE}/share/logshell/logshell.conf"

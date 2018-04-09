@@ -57,7 +57,13 @@ if [ -r ~/.config/logshell.conf ]; then
     . ~/.config/logshell.conf
 else
     mkdir -p ~/.config
-    cp -n /usr/local/share/logshell/logshell.conf ~/.config
+    if [ -f ~/.local/share/logshell/logshell.conf ]; then
+        cp -n ~/.local/share/logshell/logshell.conf ~/.config
+        . ~/.config/logshell.conf
+    elif [-f /usr/local/share/logshell/logshell.conf ]; then
+        cp -n /usr/local/share/logshell/logshell.conf ~/.config
+        . ~/.config/logshell.conf
+    fi
 fi
 
 # Options: -c command, -f logfile, -p path, -s shell, -h

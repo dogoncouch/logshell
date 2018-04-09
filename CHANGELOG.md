@@ -1,6 +1,10 @@
 # Change log
 Change log for [logshell](https://github.com/dogoncouch/logshell)
 
+## [Unreleased]
+### Updated
+- `setup.sh` now installs full docs even in non-root install
+
 ## [0.3-beta]
 ## Added
 - '-o' option to strip escape sequences from output
