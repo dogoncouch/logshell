@@ -39,6 +39,6 @@ echo Installing documentation
 mkdir -p "${USRBASE}/share/man/man1"
 cp doc/logshell.1 "${USRBASE}/share/man/man1"
 mkdir -p "${USRBASE}/share/doc/logshell"
-cp README.md LICENSE "${USRBASE}/share/doc/logshell"
+cp README.md LICENSE CHANGELOG.md "${USRBASE}/share/doc/logshell"
 mkdir -p "${USRBASE}/share/logshell"
 cp logshell.conf "${USRBASE}/share/logshell/logshell.conf"
