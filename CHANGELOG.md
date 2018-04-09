@@ -1,7 +1,7 @@
 # Change log
 Change log for [logshell](https://github.com/dogoncouch/logshell)
 
-## [Unreleased]
+## [0.4] - 2018-04-09
 ### Updated
 - `setup.sh` now installs full docs even in non-root install
 

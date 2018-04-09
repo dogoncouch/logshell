@@ -27,7 +27,7 @@
 # WARNING: Issue with programs that use full screen output;
 # Log files can become difficult to read.
 
-VERSION="1.0"
+VERSION="0.4"
 
 usage() {
     echo "Usage: ${0##*/} [-hvo] [-c {script|screen}] [-f <logfile>] [-s <shell>] [-e <file>]"
