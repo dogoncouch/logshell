@@ -35,13 +35,13 @@ if [ -w /usr/local/bin ]; then
     else
         echo Documentation not installed - no permissions in /usr/share/man
     fi
-    if [ -w /usr/local/share ]; then
+    if [ -w /usr/local ]; then
         echo Installing config template at:
         echo /usr/local/share/logshell/logshell.conf
         mkdir -p /usr/local/share/logshell
         cp logshell.conf /usr/local/share/logshell/logshell.conf
     else
-        echo Config template not installed - no permissions in /usr/local/share
+        echo Config template not installed - no permissions in /usr/local/
     fi
 else
     echo No write privileges in /usr/bin:
