@@ -27,7 +27,7 @@
 # WARNING: Issue with programs that use full screen output;
 # Log files can become difficult to read.
 
-VERSION="0.4"
+VERSION="0.5"
 
 usage() {
     echo "Usage: ${0##*/} [-hvo] [-c {script|screen}] [-f <logfile>] [-s <shell>] [-e <file>]"
@@ -40,17 +40,17 @@ usage() {
     echo "  -c [script|screen]      Command to use (script or screen)"
     echo "  -f <logfile>            Output file (try default)"
     echo "  -p <logpath>            Output path (do not use with -f)"
-    echo "  -s <shell>              Shell to use"
+    echo "  -s <shell>              Shell to use (or command to execute)"
 }
 
 # Basic config in case no file is present:
 # Command to use - current options are "script -f" and "screen -L"
 COMMAND="script -f"
 # Shell to use:
-LSHELL=$SHELL
+LSHELL="$SHELL"
 # Log file
-LOGPATH=~/log/logshell
-LOGFILE=shell.$(date -u +%Y%m%d-%H%M%S)-UTC.${USER}@${HOSTNAME:-$(hostname)}.$$.${RANDOM}.log
+LOGPATH=~/.local/log/logshell
+LOGFILE="shell.$(date -u +%Y%m%d-%H%M%S)-UTC.${USER}@${HOSTNAME:-$(hostname)}.$$.${RANDOM}.log"
 
 # Read local user config file:
 if [ -r ~/.config/logshell.conf ]; then
@@ -66,26 +66,25 @@ else
     fi
 fi
 
-# Options: -c command, -f logfile, -p path, -s shell, -h
 while getopts ":c:f:p:s:e:ovh:" o; do
     case "${o}" in
         c)
-            if [ $OPTARG = "script" ]; then
+            if [ "$OPTARG" = "script" ]; then
                 COMMAND="script -f"
             fi
-            if [ $OPTARG = "screen" ]; then
+            if [ "$OPTARG" = "screen" ]; then
                 COMMAND="screen -L"
             fi
             ;;
         f)
             LOGPATH=''
-            LOGFILE=${OPTARG}
+            LOGFILE="${OPTARG}"
             ;;
         p)
-            LOGPATH=${OPTARG}
+            LOGPATH="${OPTARG}"
             ;;
         s)
-            LSHELL=${OPTARG}
+            LSHELL="${OPTARG}"
             ;;
         o)
             FORMATTING=1
@@ -119,23 +118,19 @@ echo
 echo ==========================
 echo
 
-# Make sure log path can be written:
-if [ $LOGPATH ]; then
-    if [ ! -w $LOGPATH ]; then
-        echo Trying to create path for log file.
-        mkdir -p $LOGPATH
+# Prepare output path, make sure log path can be written:
+if [ -n "$LOGPATH" ]; then
+    FULLPATH="$LOGPATH/$LOGFILE"
+    if [ ! -w "$LOGPATH" ]; then
+        echo "Trying to create path for log file: $LOGPATH".
+        mkdir -p "$LOGPATH"
     fi
-fi
-
-# Prepare the full output path:
-if [ $LOGPATH ]; then
-    FULLPATH=$LOGPATH/$LOGFILE
 else
-    FULLPATH=$LOGFILE
+    FULLPATH="$LOGFILE"
 fi
 
 # Execute the command:
-SHELL=$LSHELL $COMMAND $FULLPATH
+SHELL="$LSHELL" $COMMAND "$FULLPATH"
 
 # Strip special characters from output:
 if [ $FORMATTING ]; then
@@ -145,9 +140,9 @@ fi
 # Print the size of the closed log file after the shell exits:
 echo
 echo Size of log file:
-du -sh $FULLPATH
+du -sh "$FULLPATH"
 if [ $FORMATTING ]; then
     echo
     echo Size of unformatted log file:
-    du -sh $FULLPATH.alt
+    du -sh "$FULLPATH.alt"
 fi
