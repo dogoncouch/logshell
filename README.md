@@ -26,9 +26,11 @@ Optional arguments:
 
 3. If you set a command as your shell (with the -s option), logshell will execute it, log the output, and then exit. The following will start the quizlight program, log its output, and then log out of the system entirely so the test-taker can't do any tampering:
 
-    logshell -s quizlight ; exit
+```
+logshell -s quizlight ; exit
 
-    # Note: This only works with commands that output to standard output.
+# Note: This only works with commands that output to standard output.
+```
 
 4. Using logshell to capture trace output is a good development tool. Full output is captured, and can be compared to trace output from known working versions for debugging.
 
