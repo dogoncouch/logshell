@@ -45,7 +45,11 @@ usage() {
 
 # Basic config in case no file is present:
 # Command to use - current options are "script -f" and "screen -L"
-COMMAND="script -f"
+if [ "$TERM_PROGRAM" = Apple_Terminal ]; then
+    COMMAND="script"
+else
+    COMMAND="script -f"
+fi
 # Shell to use:
 LSHELL="$SHELL"
 # Log file
@@ -70,10 +74,14 @@ while getopts ":c:f:p:s:e:ovh:" o; do
     case "${o}" in
         c)
             if [ "$OPTARG" = "script" ]; then
-                COMMAND="script -f"
+                if [ "$TERM_PROGRAM" = Apple_Terminal ]; then
+                    COMMAND="script"
+                else
+                    COMMAND="script -f"
+                fi
             fi
             if [ "$OPTARG" = "screen" ]; then
-                COMMAND="screen -L"
+                COMMAND="screen"
             fi
             ;;
         f)
@@ -129,8 +137,26 @@ else
     FULLPATH="$LOGFILE"
 fi
 
+
+if  [ $COMMAND = 'screen' ] ; then
+    SCREENRCFILE="/tmp/screenrc.$$.${RANDOM}"
+
+    # Set up temporary rc file:
+    cat << EOF >$SCREENRCFILE
+logfile $FULLPATH
+logtstamp on
+EOF
+
+    # Run screen:
+    screen -c "$SCREENRCFILE" -L "$LSHELL"
+    rm "$SCREENRCFILE"
+
+else
+
 # Execute the command:
 SHELL="$LSHELL" $COMMAND "$FULLPATH"
+
+fi
 
 # Strip special characters from output:
 if [ $FORMATTING ]; then
